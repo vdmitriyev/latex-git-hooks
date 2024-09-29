@@ -1,6 +1,6 @@
 - id: validate-filename
   name: validate filename
-  description: Hook ensures that filenames are correct
+  description: Hook ensures that TeX filenames are correct
   entry: lgh-validate-filename
   language: python
-  types: [python]
+  types: [file, tex]
