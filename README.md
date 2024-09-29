@@ -14,15 +14,15 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
     ```yaml
     repos:
     - repo: https://github.com/vdmitriyev/latex-git-hooks
-        rev: v0.0.1
-        hooks:
-        - id: validate-filename
+      rev: v0.0.1
+      hooks:
+      - id: validate-filename
         
     - repo: https://github.com/pre-commit/pre-commit-hooks
-        rev: v3.3.0
-        hooks:
-        - id: check-merge-conflict
-        - id: check-yaml
+      rev: v3.3.0
+      hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
     ```
 1. Run to install dependencies:
     ```
