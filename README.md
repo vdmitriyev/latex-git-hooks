@@ -14,10 +14,10 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
     ```yaml
     repos:
     - repo: https://github.com/vdmitriyev/latex-git-hooks
-      rev: v0.1.0
+      rev: v0.1.1
       hooks:
       - id: validate-filename
-	  - id: check-latex-packages
+      - id: check-latex-packages
         
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v3.3.0

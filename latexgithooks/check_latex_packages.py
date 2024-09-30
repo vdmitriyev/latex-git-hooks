@@ -67,7 +67,7 @@ def is_correct_packages_import(file_path: str, verbose: bool = False) -> bool:
                     if trimmed_line.startswith("\\usepackage"):
                         if after_document_tag:
                             print(
-                                f"Found '\\usepackage' usage after '\\begin{{document}}' in file {file_path} on line: {line_number}"
+                                f"Found '\\usepackage' usage after '\\begin{{document}}' in file '{file_path}' on line: {line_number}"
                             )
                             return False
                         packages_lines[line_number] = {
@@ -83,7 +83,7 @@ def is_correct_packages_import(file_path: str, verbose: bool = False) -> bool:
 
         duplicates = find_duplicates(packages_lines)
         if len(duplicates) > 0:
-            print(f"Found '\\usepackage' duplicates in file {file_path} on the lines: {duplicates}")
+            print(f"Found '\\usepackage' duplicates in file '{file_path}' on the lines: {duplicates}")
             return False
     except Exception:
         # if verbose:
