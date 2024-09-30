@@ -4,3 +4,9 @@
   entry: lgh-validate-filename
   language: python
   types: [file, tex]
+- id: check-latex-packages
+  name: checks LaTeX packages
+  description: Hook for checking LaTeX package imports
+  entry: lgh-check-latex-packages
+  language: python
+  types: [file, tex]
