@@ -13,10 +13,8 @@ vars:
       """
   VENV_DIR: ".venv"
 
-includes:
-  win: ./Taskfile_windows.yml
-
 tasks:
+
   default:
     silent: true
     cmds:
@@ -39,7 +37,7 @@ tasks:
     cmds:
       - task: clean-build
       - task: clean-pyc
-      #- task: clean-test
+      - task: clean-test
 
   clean-build:
     silent: true
@@ -87,11 +85,17 @@ tasks:
     cmds:
       - pip uninstall {{.PACKAGE_NAME}}
 
-  pre-commit:
+  pre-commit-run:
     deps: [check-virtualenv]
     silent: true
     cmds:
       - pre-commit run --all-files
+      
+  pre-commit-install:
+    deps: [check-virtualenv]
+    silent: true
+    cmds:
+      - pre-commit install
 
   pre-commit-update:
     deps: [check-virtualenv]
