@@ -13,9 +13,13 @@ vars:
       """
   VENV_DIR: ".venv"
 
+#includes:
+#  latex: ./Taskfile_latex.yml
+  
 tasks:
 
   default:
+    desc: lists all tasks
     silent: true
     cmds:
       - task --list-all
@@ -23,6 +27,7 @@ tasks:
       - echo "Example usage-> 'task check-virtualenv'"
 
   check-virtualenv:
+    desc: checks Python virtualenv activation
     silent: true
     run: once
     cmds:
@@ -33,13 +38,17 @@ tasks:
       - python --version
 
   clean-all:
+    desc: cleans all
     deps: [check-virtualenv]
+    run: once
+    silent: true
     cmds:
       - task: clean-build
       - task: clean-pyc
       - task: clean-test
 
   clean-build:
+    desc: cleans Python builds
     silent: true
     deps: [check-virtualenv]
     cmds:
@@ -50,6 +59,7 @@ tasks:
       - rm -fr {{.PACKAGE_NAME}}.egg-info
 
   clean-pyc:
+    desc: cleans Python artifacts
     silent: true
     deps: [check-virtualenv]
     cmds:
@@ -60,6 +70,7 @@ tasks:
       #- find . -name '__pycache__' -exec rm -fr {} +
 
   clean-test:
+    desc: cleans tests artifacts
     deps: [check-virtualenv]
     cmds:
       - echo "remove test and coverage artifacts"
@@ -68,71 +79,28 @@ tasks:
       - rm -fr htmlcov/
       - rm -fr .pytest_cache
 
-  package-help:
+  version:
+    desc: shows version of "{{.PACKAGE_NAME}}"
     deps: [check-virtualenv]
     cmds:
       - echo 'package version {{.PACKAGE_VERSION}}'
       - python -m {{.PACKAGE_NAME}} --help
 
   install:
+    desc: installs "{{.PACKAGE_NAME}}"
     deps: [check-virtualenv]
     cmds:
       - pip install --editable .
       - python -c "import {{.PACKAGE_NAME}}"
 
   uninstall:
+    desc: uninstalls "{{.PACKAGE_NAME}}"
     deps: [check-virtualenv]
     cmds:
       - pip uninstall {{.PACKAGE_NAME}}
 
-  pre-commit-run:
-    deps: [check-virtualenv]
-    silent: true
-    cmds:
-      - pre-commit run --all-files
-      
-  pre-commit-install:
-    deps: [check-virtualenv]
-    silent: true
-    cmds:
-      - pre-commit install
-
-  pre-commit-update:
-    deps: [check-virtualenv]
-    silent: true
-    cmds:
-      - pre-commit autoupdate
-      - pre-commit run --all-files
-
-  git-tag-create:
-    deps: [check-virtualenv]
-    cmds:
-      - task: build
-      - git tag v{{.PACKAGE_VERSION}}
-      - echo "latest git tag"
-      - git describe --tags --abbrev=0
-
-  git-tag-re-create:
-    deps: [check-virtualenv]
-    cmds:
-      - git tag -d v{{.PACKAGE_VERSION}}
-      - task: git-tag-create
-
-  git-tag-print:
-    silent: true
-    deps: [check-virtualenv]
-    cmds:
-      - echo "list of git tag"
-      - git tag
-      - echo "latest git tag"
-      - git describe --tags --abbrev=0
-
-  git-tag-push:
-    deps: [check-virtualenv]
-    cmds:
-        - git push --tags origin
-
   build:
+    desc: builds "{{.PACKAGE_NAME}}"
     silent: true
     deps: [check-virtualenv]
     cmds:
@@ -142,7 +110,49 @@ tasks:
       - echo "files in dist"
       - ls -lh dist
 
+  publish-test-pypi:
+    desc: publishes "{{.PACKAGE_NAME}}"
+    deps: [check-virtualenv]
+    cmds:
+      - echo "uploads to testpypi"
+      - task: build
+      - py -m twine upload --repository testpypi dist/*
+
+  git-tag-create:
+    desc: creates a new git tag (uses version of "{{.PACKAGE_NAME}}")
+    silent: true
+    deps: [check-virtualenv]
+    cmds:
+      - task: build
+      - git tag {{.PACKAGE_VERSION}}
+      - echo "latest git tag"
+      - git describe --tags --abbrev=0
+
+  git-tag-re-create:
+    desc: re-creates a new git tag (uses version of "{{.PACKAGE_NAME}}")
+    deps: [check-virtualenv]
+    cmds:
+      - git tag -d {{.PACKAGE_VERSION}}
+      - task: git-tag-create
+
+  git-tag-print:
+    desc: prints all git tags
+    silent: true
+    deps: [check-virtualenv]
+    cmds:
+      - echo "list of git tag"
+      - git tag
+      - echo "latest git tag"
+      - git describe --tags --abbrev=0
+
+  git-tag-push:
+    desc: pushes all git tags to remote
+    deps: [check-virtualenv]
+    cmds:
+        - git push --tags origin
+
   pytest:
+    desc: runs tests
     silent: true
     deps: [check-virtualenv]
     cmds:
@@ -150,6 +160,7 @@ tasks:
       - pytest
 
   pytest-verbose:
+    desc: runs tests (verbose)
     silent: true
     deps: [check-virtualenv]
     cmds:
@@ -157,9 +168,31 @@ tasks:
       - pytest -v -s
 
   tox:
+    desc: runs tox
     silent: true
     deps: [check-virtualenv]
     cmds:
       - echo "running tox"
       - tox
 
+  pre-commit-install:
+    desc: installs git hooks
+    deps: [check-virtualenv]
+    silent: true
+    cmds:
+      - pre-commit install
+
+  pre-commit-run:
+    desc: runs installed git hooks
+    deps: [check-virtualenv]
+    silent: true
+    cmds:
+      - pre-commit run --all-files
+
+  pre-commit-update:
+    desc: updates git hooks
+    deps: [check-virtualenv]
+    silent: true
+    cmds:
+      - pre-commit autoupdate
+      - pre-commit run --all-files

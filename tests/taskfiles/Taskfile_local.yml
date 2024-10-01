@@ -1,0 +1,59 @@
+version: '3'
+
+vars:
+  VENV_DIR: ".venv"
+
+tasks:
+
+  default:
+    silent: true
+    cmds:
+      - task --list-all
+      - echo ""
+      - echo "Example usage-> 'task check-virtualenv'"
+
+  check-virtualenv:
+    silent: true
+    run: once
+    cmds:
+      - echo "Check existence of a virtual directory-> {{.VENV_DIR}}"
+      - test -d {{.VENV_DIR}}
+      - echo -n "Check if virtual environment is active-> " && python -c "import sys; print('virtualenv is active' if sys.prefix != sys.base_prefix else 'virtualenv is NOT active')"
+      - python -c "import sys; exit(1 if sys.prefix == sys.base_prefix else 0)"
+      - python --version
+
+  hook-all:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks --verbose --all-files
+      
+  hook-validate-filename:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks validate-filename --verbose --all-files
+      
+  hook-check-latex-packages:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks check-latex-packages --verbose --all-files
+      
+  hook-check-latex-packages:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks check-latex-packages --verbose --all-files
+      
+  hook-ignore-auxiliary-files:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks ignore-auxiliary-files --verbose --all-files    
+      
+  hook-no-space-in-cite:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks no-space-in-cite --verbose --all-files
+      
+  hook-no-space-in-citep:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks no-space-in-citep --verbose --all-files
+     
