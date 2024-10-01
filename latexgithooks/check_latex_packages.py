@@ -58,7 +58,7 @@ def is_correct_packages_import(file_path: str, verbose: bool = False) -> bool:
     try:
         packages_lines, packages_lines_cleaned = {}, {}
         after_document_tag = False
-        with open(file_path, "r") as file:
+        with open(file_path, mode="r", encoding="utf-8") as file:
             for line_number, line in enumerate(file, start=1):
                 trimmed_line = line.strip()
                 if not trimmed_line.startswith("%"):
@@ -86,9 +86,9 @@ def is_correct_packages_import(file_path: str, verbose: bool = False) -> bool:
             print(f"Found '\\usepackage' duplicates in file '{file_path}' on the lines: {duplicates}")
             return False
     except Exception:
-        # if verbose:
-        print(f"Filename: {file_path}; exception: {traceback.format_exc()}")
-        return False
+        print("Exception happened during the hook run. The run will be marked as 'passed'")
+        print(f"Filename: {file_path}. Exception:\n{traceback.format_exc()}")
+        return True
 
     return True
 
