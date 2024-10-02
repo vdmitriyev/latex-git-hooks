@@ -21,6 +21,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
       - id: ignore-auxiliary-files
       - id: no-space-in-cite
       - id: no-space-in-citep
+      - id: comma-in-eg-ie
         
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v3.3.0
