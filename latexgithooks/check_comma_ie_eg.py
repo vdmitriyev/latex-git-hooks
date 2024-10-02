@@ -6,7 +6,10 @@ import sys
 import traceback
 from typing import Sequence
 
-comma_in_eg_ie = "((e\\.g\\.)|(i\\.e\\.))[^,]"
+#comma_in_eg_ie = "((e\\.g\\.)|(i\\.e\\.))[^,]"
+comma_in_ie = "(i\\.e\\.)"
+comma_in_eg = "(e\\.g\\.)"
+
 
 ie_permutations = [
     "ie",
@@ -55,10 +58,10 @@ def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
                 trimmed_line = line.strip()
                 if not trimmed_line.startswith("%"):
                     if container_permutation(line, ie_permutations):
-                        if not re.search(comma_in_eg_ie, line):
+                        if not re.search(comma_in_ie, line):
                             errors["ie"].append(line_number)
                     if container_permutation(line, eg_permutations):
-                        if not re.search(comma_in_eg_ie, line):
+                        if not re.search(comma_in_eg, line):
                             errors["eg"].append(line_number)
     except Exception:
         print("Exception happened during the hook run. The run will be marked as 'passed'")

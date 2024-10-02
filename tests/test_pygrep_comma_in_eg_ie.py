@@ -1,62 +1,100 @@
 import re
 
-from latexgithooks.check_comma_ie_eg import comma_in_eg_ie, is_correct_comma_ie_eg
+from latexgithooks.check_comma_ie_eg import (
+    comma_in_eg,
+    comma_in_ie,
+    is_correct_comma_ie_eg,
+)
 
 
-def test_comma_in_eg_ie_positive():
+def test_comma_in_eg_positive():
     """Tests the regex for correct matching of 'e.g.' or 'i.e.' followed by a non-comma character."""
 
     # Positive test cases
-    positive_cases = [
+    positive_cases_eg = [
         "e.g. hello",
-        "i.e. world",
         "e.g.123",
-        "i.e. abc",
         "e.g.!",
+    ]
+
+    for case in positive_cases_eg:
+        assert re.search(comma_in_eg, case)
+
+
+def test_comma_in_ie_positive():
+    """Tests the regex for correct matching of 'e.g.' or 'i.e.' followed by a non-comma character."""
+
+    # Positive test cases
+    positive_cases_ei = [
+        "i.e. world",
+        "i.e. abc",
         "i.e.?",
     ]
 
-    for case in positive_cases:
-        assert re.search(comma_in_eg_ie, case)
+    for case in positive_cases_ei:
+        assert re.search(comma_in_ie, case)
 
 
-def test_comma_in_eg_ie_negative():
-    """Tests the regex for correct matching of 'e.g.' or 'i.e.' followed by a non-comma character."""
+def test_comma_in_eg_negative():
+    """Tests the regex for incorrect matching of 'e.g.' or 'i.e.' followed by a non-comma character."""
 
-    # Negative test cases
-    negative_cases = [
+    # Test cases with expected no matches
+    test_cases_no_match_01 = [
         "e.g",
         "eg.,",
         "eg,",
         "eg..,",
+        "e.g,",
+        "this is a test",
+        "this is another test",
+        "hello world",
+    ]
+
+    for case in test_cases_no_match_01:
+        assert not re.search(comma_in_eg, case)
+
+
+def test_comma_in_ie_negative():
+    """Tests the regex for incorrect matching of 'e.g.' or 'i.e.' followed by a non-comma character."""
+
+    # Test cases with expected no matches
+    test_cases_no_match_01 = [
         "i.e",
         "ie.,",
         "ie,",
         "ie..,",
+        "this is a test",
+        "this is another test",
         "hello world",
     ]
 
-    for case in negative_cases:
-        assert not re.search(comma_in_eg_ie, case)
+    for case in test_cases_no_match_01:
+        assert not re.search(comma_in_ie, case)
 
 
-def test_comma_in_eg_ie():
+def test_comma_in_eg():
     """Tests the regex for finding "e.g." or "i.e." followed by a non-comma character."""
 
     # Test cases with expected matches
     test_cases_match = [
         "e.g. this is a test",
-        "i.e. this is another test",
         "e.g. this is a test, but this is not",
+        "using data (e.g., data , etc.).",
+    ]
+    for test_case in test_cases_match:
+        assert re.search(comma_in_eg, test_case)
+
+
+def test_comma_in_ie():
+    """Tests the regex for finding "e.g." or "i.e." followed by a non-comma character."""
+
+    # Test cases with expected matches
+    test_cases_match = [
+        "i.e. this is another test",
         "i.e. this is another test, but this is not",
     ]
     for test_case in test_cases_match:
-        assert re.search(comma_in_eg_ie, test_case)
-
-    # Test cases with expected no matches
-    test_cases_no_match = ["e.g,", "i.e,", "this is a test", "this is another test"]
-    for test_case in test_cases_no_match:
-        assert not re.search(comma_in_eg_ie, test_case)
+        assert re.search(comma_in_ie, test_case)
 
 
 #
