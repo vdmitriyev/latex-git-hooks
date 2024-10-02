@@ -1,7 +1,8 @@
-__description__ = "Tool for validating TeX filenames meet certain requirements"
+__description__ = "Validate a TeX filename for certain requirements"
 
 import argparse
 import re
+import sys
 import traceback
 from pathlib import Path
 from typing import Sequence
@@ -88,3 +89,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     results = [not is_valid_filename(filename, args.min_len, args.verbose) for filename in args.filenames]
     return int(any(results))
+
+
+if __name__ == "__main__":
+    sys.exit(main())

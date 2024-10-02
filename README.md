@@ -14,7 +14,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
     ```yaml
     repos:
     - repo: https://github.com/vdmitriyev/latex-git-hooks
-      rev: v0.1.4
+      rev: v0.1.5
       hooks:
       - id: validate-filename
       - id: check-latex-packages

@@ -1,10 +1,9 @@
-__description__ = "Tool for checking LaTeX package imports"
+__description__ = "Checks usage of LaTeX packages"
 
 import argparse
-import os
 import re
+import sys
 import traceback
-from pathlib import Path
 from typing import Sequence
 
 
@@ -56,8 +55,9 @@ def is_correct_packages_import(file_path: str, verbose: bool = False) -> bool:
     """
 
     try:
-        packages_lines, packages_lines_cleaned = {}, {}
+        packages_lines = {}
         after_document_tag = False
+
         with open(file_path, mode="r", encoding="utf-8") as file:
             for line_number, line in enumerate(file, start=1):
                 trimmed_line = line.strip()
@@ -72,19 +72,16 @@ def is_correct_packages_import(file_path: str, verbose: bool = False) -> bool:
                             return False
                         packages_lines[line_number] = {
                             "number": line_number,
-                            "line": trimmed_line,
-                            "after": after_document_tag,
-                        }
-                        packages_lines[line_number] = {
-                            "number": line_number,
                             "line": remove_package_args(trimmed_line),
                             "after": after_document_tag,
                         }
 
         duplicates = find_duplicates(packages_lines)
+
         if len(duplicates) > 0:
-            print(f"Found '\\usepackage' duplicates in file '{file_path}' on the lines: {duplicates}")
+            print(f"Found '\\usepackage' duplicates in file '{file_path}' in lines: {duplicates}")
             return False
+
     except Exception:
         print("Exception happened during the hook run. The run will be marked as 'passed'")
         print(f"Filename: {file_path}. Exception:\n{traceback.format_exc()}")
@@ -94,6 +91,14 @@ def is_correct_packages_import(file_path: str, verbose: bool = False) -> bool:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    """_summary_
+
+    Args:
+        argv (Sequence[str] | None, optional): set of arguments passed to the program . Defaults to None.
+
+    Returns:
+        int: 0 return value indicate successful termination
+    """
 
     parser = argparse.ArgumentParser(prog="check-latex-packages", description=__description__)
 
@@ -114,3 +119,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     results = [not is_correct_packages_import(filename, args.verbose) for filename in args.filenames]
     return int(any(results))
+
+
+if __name__ == "__main__":
+    sys.exit(main())
