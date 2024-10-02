@@ -59,7 +59,9 @@ def test_comma_in_eg_ie():
         assert not re.search(comma_in_eg_ie, test_case)
 
 
-# Test cases - comm_ie_eg
+#
+# Test cases - comma_ie_eg
+#
 def test_correct_comma_ie_eg(tex_file_path):
     valid_tex_files = [f for f in tex_file_path if "correct" in f and "comma_ie_eg" in f]
 

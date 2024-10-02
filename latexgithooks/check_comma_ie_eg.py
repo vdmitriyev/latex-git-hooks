@@ -30,11 +30,12 @@ eg_permutations = ["e.G.", "E.g.", "E.G.", "eg.", "egG", "EG.", "Eg.", "e.g", "e
 
 
 def container_permutation(line: str, permutations: list):
-    for per in permutations:
-        if per in line:
+    for item in permutations:
+        if     f" {item}" in line\
+            or f"({item}" in line\
+            or f"{item})" in line:
             return True
     return False
-
 
 def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
     """Method for checking commas in i.e. and e.g.
