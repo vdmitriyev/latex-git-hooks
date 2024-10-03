@@ -16,9 +16,7 @@ def remove_package_args(input_str: str) -> str:
     Returns:
         str: The modified string
     """
-    # Compile regular expression to match the pattern
     pattern = re.compile(r"\\usepackage\[(.*?)\]\{(.*?\})")
-
     # Use the compiled pattern to find and replace the string
     return re.sub(pattern, lambda x: "\\usepackage{" + x.group(2), input_str)
 

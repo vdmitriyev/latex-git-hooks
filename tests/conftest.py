@@ -3,6 +3,10 @@ import os
 import pytest
 
 
+def pytest_configure(config):
+    config.addinivalue_line("markers", "env(name): mark test to run only on named environment")
+
+
 # Fixtures
 @pytest.fixture
 def tex_file_path(folder_name="data", file_pattern=".tex"):

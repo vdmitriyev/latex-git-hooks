@@ -6,12 +6,10 @@ import sys
 import traceback
 from typing import Sequence
 
-#comma_in_eg_ie = "((e\\.g\\.)|(i\\.e\\.))[^,]"
 comma_in_ie = "(i\\.e\\.)"
 comma_in_eg = "(e\\.g\\.)"
 
-
-ie_permutations = [
+ie_base_permutations = [
     "ie",
     "Ie",
     "iE",
@@ -29,14 +27,59 @@ ie_permutations = [
     "I.E.",
 ]
 
-eg_permutations = ["e.G.", "E.g.", "E.G.", "eg.", "egG", "EG.", "Eg.", "e.g", "e.G", "E.g", "E.G"]
+eg_base_permutations = [
+    "eg",
+    "Eg",
+    "eG",
+    "EG",
+    "e.g",
+    "E.g",
+    "e.G",
+    "E.G",
+    "eg.",
+    "Eg.",
+    "eG.",
+    "EG.",
+    "E.g.",
+    "e.G.",
+    "E.G."
+]
+
+def add_symbols_to_permutations(permutations:list) -> list:
+    """Adds symbols to each item in the given list.
+
+    Args:   
+        permutations (list): a list of strings.
+
+    Returns:
+        list:  a new list with symbols added to each item.
+    """    
+    symbols = ["#", "'", "\"", "(", ")"]
+    new_permutations = []
+    new_permutations += [item +" " for item in permutations]
+    new_permutations += [" " + item for item in permutations]
+
+    for permutation in permutations:
+        for symbol in symbols:
+            new_permutations.append(permutation + symbol)
+            new_permutations.append(symbol + permutation)
+
+    return new_permutations
 
 
-def container_permutation(line: str, permutations: list):
+def contains_permutation(line: str, permutations: list) -> bool:
+    """Checks if any of the given permutations is contained within the line.
+
+    Args:
+        line (str): The input string to be checked.
+        permutations (list): A list of strings representing the permutations to search for.
+
+    Returns:
+        bool: True if any of the permutations is found in the line, False otherwise.
+    """
+
     for item in permutations:
-        if     f" {item}" in line\
-            or f"({item}" in line\
-            or f"{item})" in line:
+        if item in line:
             return True
     return False
 
@@ -50,6 +93,10 @@ def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
     Returns:
         bool: valid or invalid file name
     """
+    
+    ie_extended_permutations = add_symbols_to_permutations(ie_base_permutations)
+    eg_extended_permutations = add_symbols_to_permutations(eg_base_permutations)
+
     errors = {}
     errors["ie"], errors["eg"] = [], []
     try:
@@ -57,10 +104,10 @@ def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
             for line_number, line in enumerate(file, start=1):
                 trimmed_line = line.strip()
                 if not trimmed_line.startswith("%"):
-                    if container_permutation(line, ie_permutations):
+                    if contains_permutation(line, ie_extended_permutations):
                         if not re.search(comma_in_ie, line):
                             errors["ie"].append(line_number)
-                    if container_permutation(line, eg_permutations):
+                    if contains_permutation(line, eg_extended_permutations):
                         if not re.search(comma_in_eg, line):
                             errors["eg"].append(line_number)
     except Exception:
@@ -68,17 +115,16 @@ def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
         print(f"Filename: {file_path}. Exception:\n{traceback.format_exc()}")
         return True
     
-    is_ok = True
+    check_verdict = True
     if len(errors["ie"]) > 0:
-        is_ok = False
+        check_verdict = False
         print(f"Found misused comma in 'i.e.' in lines: {errors["ie"]}. File: {file_path}")
 
     if len(errors["eg"]) > 0:
-        is_ok = False
+        check_verdict = False
         print(f"Found misused comma in 'e.g.' in lines: {errors["eg"]}. File: {file_path}")
-        
-
-    return is_ok
+    
+    return check_verdict
 
 
 def main(argv: Sequence[str] | None = None) -> int:

@@ -31,12 +31,13 @@ classifiers = [
 #  "click >=8.1.7",
 #  "typer >=0.12.5"
 #]
-version = "0.1.7"
+version = "0.1.8"
 
 scripts.lgh-validate-filename = "latexgithooks.validate_filename:main"
 scripts.lgh-check-latex-packages = "latexgithooks.check_latex_packages:main"
 scripts.lgh-ignore-auxiliary-files = "latexgithooks.ignore_auxiliary_files:main"
 scripts.lgh-check-comma-ie-eg = "latexgithooks.check_comma_ie_eg:main"
+scripts.lhg-check-single-command-per-line = "latexgithooks.check_single_command_per_line:main"
 
 [project.optional-dependencies]
 dev = [

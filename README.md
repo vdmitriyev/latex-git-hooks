@@ -14,7 +14,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
     ```yaml
     repos:
     - repo: https://github.com/vdmitriyev/latex-git-hooks
-      rev: v0.1.7
+      rev: v0.1.8
       hooks:
       - id: validate-filename
       - id: check-latex-packages
@@ -22,6 +22,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
       - id: no-space-in-cite
       - id: no-space-in-citep
       - id: comma-in-eg-ie
+	  - id: check-single-command-per-line
         
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v3.3.0

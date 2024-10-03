@@ -166,6 +166,14 @@ tasks:
     cmds:
       - echo "running pytest"
       - pytest -v -s
+      
+  pytest-marker:
+    desc: runs tests (marker) (add after --)
+    silent: true
+    deps: [check-virtualenv]
+    cmds:
+      - echo "running pytest with marker"
+      - pytest -m {{.CLI_ARGS}}
 
   tox:
     desc: runs tox
