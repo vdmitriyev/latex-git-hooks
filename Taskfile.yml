@@ -145,9 +145,9 @@ tasks:
       - git tag -d {{.PACKAGE_VERSION}}
       - task: git-tag-create
 
-  git-tag-print:
+  git-tag-show:
     desc: prints all git tags
-    aliases: [gtp]
+    aliases: [gts]
     silent: true
     deps: [check-virtualenv]
     cmds:

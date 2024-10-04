@@ -1,8 +1,10 @@
+import re
 from typing import Literal, LiteralString
 
 import pytest
 
 from latexgithooks.check_single_command_per_line import (
+    PATTERN_SQUARE_BRACES,
     any_symbols_after_left_curly_braces,
     is_single_command_per_line,
     remove_after_symbol,
@@ -59,6 +61,16 @@ def test_check_symbols_after_left_curly_braces():
 
 
 @pytest.mark.single_command_per_line
+def test_remove_content_between_brackets():
+
+    input_string = "\\begin{figure}[h!]"
+    expected_output = "\\begin{figure}"
+
+    result_string = re.sub(PATTERN_SQUARE_BRACES, "", input_string)
+    assert result_string == expected_output, f"Expected string: '{expected_output}'"
+
+
+@pytest.mark.single_command_per_line
 def test_check_symbols_after_left_curly_braces_many():
     """Tests the check_symbols_after_left_curly_braces function."""
 
@@ -68,6 +80,8 @@ def test_check_symbols_after_left_curly_braces_many():
         "\\end{equation}",
         "\\section{Last section}",
         "\\end{document}",
+        "\\begin{figure}[h!]",
+        "\\begin{table}[h!]",
     ]
     for item in cases_left_curly_braces:
         assert not any_symbols_after_left_curly_braces(item)
