@@ -13,9 +13,6 @@ vars:
       """
   VENV_DIR: ".venv"
 
-#includes:
-#  latex: ./Taskfile_latex.yml
-  
 tasks:
 
   default:
@@ -27,7 +24,8 @@ tasks:
       - echo "Example usage-> 'task check-virtualenv'"
 
   check-virtualenv:
-    desc: checks Python virtualenv activation
+    desc: checks Python's virtualenv activation
+    aliases: [cv]
     silent: true
     run: once
     cmds:
@@ -36,6 +34,16 @@ tasks:
       - echo -n "Check if virtual environment is active-> " && python -c "import sys; print('virtualenv is active' if sys.prefix != sys.base_prefix else 'virtualenv is NOT active')"
       - python -c "import sys; exit(1 if sys.prefix == sys.base_prefix else 0)"
       - python --version
+
+  activate-virtualenv:
+    desc: activates Python's virtualenv
+    aliases: [av, activate, activate-venv]
+    silent: true
+    run: once
+    cmds:
+      - echo "activating Python's virtualenv"
+      - echo ""
+      - scripts\\cmdStartEnvTF.bat
 
   clean-all:
     desc: cleans all
@@ -120,8 +128,9 @@ tasks:
 
   git-tag-create:
     desc: creates a new git tag (uses version of "{{.PACKAGE_NAME}}")
-    silent: true
+    aliases: [gtc]
     deps: [check-virtualenv]
+    silent: true
     cmds:
       - task: build
       - git tag {{.PACKAGE_VERSION}}
@@ -130,6 +139,7 @@ tasks:
 
   git-tag-re-create:
     desc: re-creates a new git tag (uses version of "{{.PACKAGE_NAME}}")
+    aliases: [gtrc]
     deps: [check-virtualenv]
     cmds:
       - git tag -d {{.PACKAGE_VERSION}}
@@ -137,6 +147,7 @@ tasks:
 
   git-tag-print:
     desc: prints all git tags
+    aliases: [gtp]
     silent: true
     deps: [check-virtualenv]
     cmds:
@@ -146,6 +157,7 @@ tasks:
       - git describe --tags --abbrev=0
 
   git-tag-push:
+    aliases: [gtp]
     desc: pushes all git tags to remote
     deps: [check-virtualenv]
     cmds:
@@ -185,13 +197,15 @@ tasks:
 
   pre-commit-install:
     desc: installs git hooks
+    aliases: [pci]
     deps: [check-virtualenv]
     silent: true
     cmds:
       - pre-commit install
-
+      
   pre-commit-run:
     desc: runs installed git hooks
+    aliases: [pcr]
     deps: [check-virtualenv]
     silent: true
     cmds:
@@ -199,6 +213,7 @@ tasks:
 
   pre-commit-update:
     desc: updates git hooks
+    aliases: [pcu]
     deps: [check-virtualenv]
     silent: true
     cmds:

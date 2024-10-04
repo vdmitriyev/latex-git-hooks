@@ -10,8 +10,7 @@ commands_main = ["\\section", "\\begin", "\\end", "\\chapter", "\\footnote"]
 commands_custom = ["\\rewrite", "\\info", "\\improvetext"]
 
 RE_LEFT_CURLY_BRACE = r"\}"
-# RE_SYMBOLS_AFTER_LEFT_CURLY_BRACES = r"\}[^}]*$"
-RE_SYMBOLS_AFTER_LEFT_CURLY_BRACES = r"\}[^}]"
+PATTERN_SYMBOLS_AFTER_LEFT_CURLY_BRACES = r"\}[^}]"
 
 
 def remove_after_symbol(string: str, symbol: str) -> str:
@@ -32,12 +31,13 @@ def remove_after_symbol(string: str, symbol: str) -> str:
         return string
 
 
-def are_symbols_after_left_curly_braces(input: str) -> bool:
+def any_symbols_after_left_curly_braces(input: str) -> bool:
     if not re.search(RE_LEFT_CURLY_BRACE, input):
         return False
     input = remove_after_symbol(input, "%")
     input = input.strip()
-    if re.search(RE_SYMBOLS_AFTER_LEFT_CURLY_BRACES, input):
+    index = input.rfind("}")
+    if index != len(input) - 1:
         return True
     return False
 
@@ -61,7 +61,7 @@ def is_single_command_per_line(file_path: str, verbose: bool = False) -> bool:
                 if not clean_line.startswith("%"):
                     for command in commands:
                         if clean_line.startswith(command):
-                            if are_symbols_after_left_curly_braces(clean_line):
+                            if any_symbols_after_left_curly_braces(clean_line):
                                 incorrect_lines.append(line_number)
 
         if len(incorrect_lines) > 0:

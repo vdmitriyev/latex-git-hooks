@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Tests for `pymultissher` package."""
+"""Tests for `latexgithooks` package."""
 
 import pytest
 

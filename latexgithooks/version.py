@@ -1,10 +1,10 @@
 import importlib.metadata as importlib_metadata
 
-def package_summary(package_name: str = "pymultissher"):
+def package_summary(package_name: str = "latexgithooks"):
     """Prints information about a Python package based on its metadata.
 
     Args:
-        package_name (str): The name of the package. Defaults to "pymultissher".
+        package_name (str): The name of the package. Defaults to "latexgithooks".
     """
     info = []
     try:
@@ -18,11 +18,11 @@ def package_summary(package_name: str = "pymultissher"):
     return info
 
 
-def package_version(package_name: str = "pymultissher") -> str:
+def package_version(package_name: str = "latexgithooks") -> str:
     """Returns version information about a Python package based on its metadata.
 
     Args:
-        package_name (str): The name of the package. Defaults to "pymultissher".
+        package_name (str): The name of the package. Defaults to "latexgithooks".
 
     Returns:
         str: version. Defaults to "0.0.0"

@@ -2,7 +2,7 @@
 
 This is a personal [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) collection for LaTeX documents using [pre-commit](https://github.com/pre-commit/pre-commit). It helps you to increase quality of LaTeX document. 
 
-For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks for LaTeX documents check the project [jonasbb/pre-commit-latex-hooks](https://github.com/jonasbb/pre-commit-latex-hooks). A number of git hook in this repo have been from the mentioned project (primary the one using `pygrep` and `regex`).
+For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks for LaTeX documents check the project [jonasbb/pre-commit-latex-hooks](https://github.com/jonasbb/pre-commit-latex-hooks). A number of git hook in this repo are using some ideas from the mentioned project (primary the one using `pygrep` and `regex`).
 
 ### Installation
 
@@ -14,7 +14,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
     ```yaml
     repos:
     - repo: https://github.com/vdmitriyev/latex-git-hooks
-      rev: v0.1.8
+      rev: v0.1.9
       hooks:
       - id: validate-filename
       - id: check-latex-packages

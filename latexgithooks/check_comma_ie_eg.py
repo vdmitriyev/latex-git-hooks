@@ -56,7 +56,7 @@ def add_symbols_to_permutations(permutations:list) -> list:
     """    
     symbols = ["#", "'", "\"", "(", ")"]
     new_permutations = []
-    new_permutations += [item +" " for item in permutations]
+    new_permutations += [item + " " for item in permutations]
     new_permutations += [" " + item for item in permutations]
 
     for permutation in permutations:
@@ -69,6 +69,7 @@ def add_symbols_to_permutations(permutations:list) -> list:
 
 def contains_permutation(line: str, permutations: list) -> bool:
     """Checks if any of the given permutations is contained within the line.
+       If a letter ig given before item from a permutations, will be marked as "no-permutation found"
 
     Args:
         line (str): The input string to be checked.
@@ -80,7 +81,12 @@ def contains_permutation(line: str, permutations: list) -> bool:
 
     for item in permutations:
         if item in line:
+            index = line.find(item)
+            if index > 0:
+                if line[index-1].isalpha():
+                    return False
             return True
+
     return False
 
 def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:

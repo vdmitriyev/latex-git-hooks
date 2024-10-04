@@ -3,7 +3,7 @@ from typing import Literal, LiteralString
 import pytest
 
 from latexgithooks.check_single_command_per_line import (
-    are_symbols_after_left_curly_braces,
+    any_symbols_after_left_curly_braces,
     is_single_command_per_line,
     remove_after_symbol,
 )
@@ -35,27 +35,27 @@ def test_check_symbols_after_left_curly_braces():
 
     # Test case with symbols after closing curly brace
     text_with_symbols = "This is {a sample text} with some symbols after!@"
-    assert are_symbols_after_left_curly_braces(text_with_symbols)
+    assert any_symbols_after_left_curly_braces(text_with_symbols)
 
     # Test case with only whitespaces after closing curly brace
     text_with_whitespaces = "This is {a sample text} with whitespaces after  "
-    assert are_symbols_after_left_curly_braces(text_with_whitespaces)
+    assert any_symbols_after_left_curly_braces(text_with_whitespaces)
 
     # Test case without closing curly brace
     text_no_brace = "This is a simple text with no curly braces"
-    assert not are_symbols_after_left_curly_braces(text_no_brace)
+    assert not any_symbols_after_left_curly_braces(text_no_brace)
 
     # Test case with closing curly brace
     text_no_brace = "This is a simple text with no curly braces}"
-    assert not are_symbols_after_left_curly_braces(text_no_brace)
+    assert not any_symbols_after_left_curly_braces(text_no_brace)
 
     # Test case with closing curly brace and whitespaces
     text_no_brace = "This is a simple text with no curly braces}     "
-    assert not are_symbols_after_left_curly_braces(text_no_brace)
+    assert not any_symbols_after_left_curly_braces(text_no_brace)
 
     # Test case with closing curly brace and whitespaces
     text_no_brace = "This is a simple text with no curly braces}     "
-    assert not are_symbols_after_left_curly_braces(text_no_brace)
+    assert not any_symbols_after_left_curly_braces(text_no_brace)
 
 
 @pytest.mark.single_command_per_line
@@ -70,7 +70,7 @@ def test_check_symbols_after_left_curly_braces_many():
         "\\end{document}",
     ]
     for item in cases_left_curly_braces:
-        assert not are_symbols_after_left_curly_braces(item)
+        assert not any_symbols_after_left_curly_braces(item)
 
 
 @pytest.mark.single_command_per_line
