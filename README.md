@@ -4,6 +4,17 @@ This is a personal [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git
 
 For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks for LaTeX documents check the project [jonasbb/pre-commit-latex-hooks](https://github.com/jonasbb/pre-commit-latex-hooks). A number of git hook in this repo are using some ideas from the mentioned project (primary the one using `pygrep` and `regex`).
 
+## LaTeX Linters
+
+Besides git hooks, `linters` for `LaTeX` could be used to improve quality. Please, consider following `linters`:
+
+* `chktexrc`
+    - ChkTeX - LaTeX semantic checker - https://www.nongnu.org/chktex/
+* `latexcheck-py`
+    - https://github.com/dainiak/latexcheck-py
+* `Paper-Linter`
+    - https://github.com/misc0110/Paper-Linter
+
 ### Installation
 
 1. Install pre-commit:
@@ -42,6 +53,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
     ```
     pre-commit run --all-files --verbose
     ```
+
 
 ## Usage
 
