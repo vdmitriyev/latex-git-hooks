@@ -4,17 +4,6 @@ This is a personal [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git
 
 For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks for LaTeX documents check the project [jonasbb/pre-commit-latex-hooks](https://github.com/jonasbb/pre-commit-latex-hooks). A number of git hook in this repo are using some ideas from the mentioned project (primary the one using `pygrep` and `regex`).
 
-## LaTeX Linters
-
-Besides git hooks, `linters` for `LaTeX` could be used to improve quality. Please, consider following `linters`:
-
-* `chktexrc`
-    - ChkTeX - LaTeX semantic checker - https://www.nongnu.org/chktex/
-* `latexcheck-py`
-    - https://github.com/dainiak/latexcheck-py
-* `Paper-Linter`
-    - https://github.com/misc0110/Paper-Linter
-
 ### Installation
 
 1. Install pre-commit:
@@ -54,39 +43,42 @@ Besides git hooks, `linters` for `LaTeX` could be used to improve quality. Pleas
     pre-commit run --all-files --verbose
     ```
 
-
 ## Usage
 
 The hook will automatically run before every commit. It will check your LaTeX files and report any issues. You will need to fix the issues before committing your changes.
 
-## Usage: taskfile
+## LaTeX Linters
+
+Besides git hooks, `linters` for `LaTeX` could be used to improve quality. Please, consider following `linters`:
+
+* `chktexrc`
+    - ChkTeX - LaTeX semantic checker - https://www.nongnu.org/chktex/
+* `latexcheck-py`
+    - https://github.com/dainiak/latexcheck-py
+* `Paper-Linter`
+    - https://github.com/misc0110/Paper-Linter
+	
+	
+### Development: tests
+
+* Check `tests` directory to test using `pytests`
+* Check `tests/taskfiles` directory to test using local and remote git repositories
+
+### Development: taskfile
 
 * Prerequisite: [taskfile](https://taskfile.dev/installation/) must be installed
 * Package: list avaialbe tasks:
 	```
 	task 
 	```
-* LaTeX: list avaialbe tasks:
-	```
-	task -t Taskfile_latex.yml
-	```
-* LaTeX: compile a LaTeX example:
-	```
-	task -t Taskfile_latex.yml compile -- tests/data/sample01_simple_correct.tex
-	```
-	
-## Tests
-
-* Check `tests` directory to test using `pytests`
-* Check `tests/taskfiles` directory to test using local and remote git repositories
 
 ## Configuration
 
-Currently, no configuration options are available.  Future features may offer customization.
+Currently, extra no configuration other then options in [`.pre-commit-config.yaml`](#installation) are available
 
 ## Contributing
 
-We welcome contributions! Feel free to submit pull requests with new features or bug fixes.
+Contributions are welcome! Feel free to submit pull requests with new features, bug fixes or tests.
 
 ## License
 
