@@ -38,3 +38,9 @@
   entry: lgh-check-comma-ie-eg
   language: python
   types: [file, tex]
+- id: run-linter-paperlinter
+  name: Run linter "paperlinter"
+  description: Run linter "paperlinter"
+  entry: lhg-run-linter-paperlinter
+  language: python
+  types: [file, tex]

@@ -14,7 +14,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
     ```yaml
     repos:
     - repo: https://github.com/vdmitriyev/latex-git-hooks
-      rev: v0.1.10
+      rev: v0.2.0
       hooks:
       - id: validate-filename
       - id: check-latex-packages
@@ -22,7 +22,8 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
       - id: no-space-in-cite
       - id: no-space-in-citep
       - id: comma-in-eg-ie
-	  - id: check-single-command-per-line
+      - id: check-single-command-per-line
+      - id: run-linter-paperlinter
         
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v3.3.0
@@ -47,6 +48,11 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
 
 The hook will automatically run before every commit. It will check your LaTeX files and report any issues. You will need to fix the issues before committing your changes.
 
+## Notes on `hooks`
+
+* `run-linter-paperlinter`
+	- linter hook will always exists successful and shows what has been found by linter
+
 ## LaTeX Linters
 
 Besides git hooks, `linters` for `LaTeX` could be used to improve quality. Please, consider following `linters`:
@@ -57,8 +63,7 @@ Besides git hooks, `linters` for `LaTeX` could be used to improve quality. Pleas
     - https://github.com/dainiak/latexcheck-py
 * `Paper-Linter`
     - https://github.com/misc0110/Paper-Linter
-	
-	
+
 ### Development: tests
 
 * Check `tests` directory to test using `pytests`

@@ -15,7 +15,6 @@ authors = [
 maintainers = [
   {name = "vdmitriyev"}
 ]
-
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
@@ -27,17 +26,18 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Utilities"
 ]
-#dependencies = [
-#  "click >=8.1.7",
-#  "typer >=0.12.5"
-#]
-version = "0.1.10"
+dependencies = [
+  "paperlinter@git+https://github.com/vdmitriyev/Paper-Linter"
+]
+version = "0.2.0"
 
 scripts.lgh-validate-filename = "latexgithooks.validate_filename:main"
 scripts.lgh-check-latex-packages = "latexgithooks.check_latex_packages:main"
 scripts.lgh-ignore-auxiliary-files = "latexgithooks.ignore_auxiliary_files:main"
 scripts.lgh-check-comma-ie-eg = "latexgithooks.check_comma_ie_eg:main"
 scripts.lhg-check-single-command-per-line = "latexgithooks.check_single_command_per_line:main"
+scripts.lhg-run-linter-paperlinter = "latexgithooks.run_linter_paperlinter:main"
+
 
 [project.optional-dependencies]
 dev = [

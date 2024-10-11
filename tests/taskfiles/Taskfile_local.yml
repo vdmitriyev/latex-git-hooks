@@ -66,6 +66,8 @@ tasks:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks check-single-command-per-line --verbose --all-files
-      
-      
-     
+
+  hook-run-linter-paperlinter:
+    deps: [check-virtualenv]
+    cmds:
+      - pre-commit try-repo ../latex-git-hooks run-linter-paperlinter --verbose --all-files
