@@ -133,7 +133,7 @@ tasks:
     silent: true
     cmds:
       - task: build
-      - git tag {{.PACKAGE_VERSION}}
+      - git tag v{{.PACKAGE_VERSION}}
       - echo "latest git tag"
       - git describe --tags --abbrev=0
 
@@ -142,7 +142,7 @@ tasks:
     aliases: [gtrc]
     deps: [check-virtualenv]
     cmds:
-      - git tag -d {{.PACKAGE_VERSION}}
+      - git tag -d v{{.PACKAGE_VERSION}}
       - task: git-tag-create
 
   git-tag-show:

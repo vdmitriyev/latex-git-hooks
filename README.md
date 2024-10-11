@@ -26,7 +26,7 @@ For more advanced [pre-commit](https://github.com/pre-commit/pre-commit) hooks f
       - id: run-linter-paperlinter
         
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v3.3.0
+      rev: v5.0.0
       hooks:
       - id: check-merge-conflict
       - id: check-yaml
@@ -51,7 +51,11 @@ The hook will automatically run before every commit. It will check your LaTeX fi
 ## Notes on `hooks`
 
 * `run-linter-paperlinter`
-	- linter hook will always exists successful and shows what has been found by linter
+    - linter hook will always exists successful and shows what has been found by linter
+    - As long as gnerated outputs will be supressed by `pre-commit`, run the hook as follows:
+        ```bash
+        pre-commit run run-linter-paperlinter --all-files --verbose
+        ```
 
 ## LaTeX Linters
 
