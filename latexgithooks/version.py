@@ -1,5 +1,6 @@
 import importlib.metadata as importlib_metadata
 
+
 def package_summary(package_name: str = "latexgithooks"):
     """Prints information about a Python package based on its metadata.
 

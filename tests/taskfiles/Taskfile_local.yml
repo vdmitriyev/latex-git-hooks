@@ -26,42 +26,42 @@ tasks:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks --verbose --all-files
-      
+
   hook-validate-filename:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks validate-filename --verbose --all-files
-      
+
   hook-check-latex-packages:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks check-latex-packages --verbose --all-files
-      
+
   hook-check-latex-packages:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks check-latex-packages --verbose --all-files
-      
+
   hook-ignore-auxiliary-files:
     deps: [check-virtualenv]
     cmds:
-      - pre-commit try-repo ../latex-git-hooks ignore-auxiliary-files --verbose --all-files    
-      
+      - pre-commit try-repo ../latex-git-hooks ignore-auxiliary-files --verbose --all-files
+
   hook-no-space-in-cite:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks no-space-in-cite --verbose --all-files
-      
+
   hook-no-space-in-citep:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks no-space-in-citep --verbose --all-files
-      
+
   hook-comma-in-eg-ie:
     deps: [check-virtualenv]
     cmds:
       - pre-commit try-repo ../latex-git-hooks comma-in-eg-ie --verbose --all-files
-      
+
   hook-check-single-command-per-line:
     deps: [check-virtualenv]
     cmds:

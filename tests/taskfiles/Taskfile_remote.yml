@@ -28,7 +28,7 @@ tasks:
     silent: true
     cmds:
       - pre-commit install
-      
+
   pre-commit-run:
     deps: [check-virtualenv]
     silent: true

@@ -178,7 +178,7 @@ tasks:
     cmds:
       - echo "running pytest"
       - pytest -v -s
-      
+
   pytest-marker:
     desc: runs tests (marker) (add after --)
     silent: true
@@ -202,7 +202,7 @@ tasks:
     silent: true
     cmds:
       - pre-commit install
-      
+
   pre-commit-run:
     desc: runs installed git hooks
     aliases: [pcr]

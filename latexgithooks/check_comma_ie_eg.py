@@ -42,19 +42,20 @@ eg_base_permutations = [
     "EG.",
     "E.g.",
     "e.G.",
-    "E.G."
+    "E.G.",
 ]
 
-def add_symbols_to_permutations(permutations:list) -> list:
+
+def add_symbols_to_permutations(permutations: list) -> list:
     """Adds symbols to each item in the given list.
 
-    Args:   
+    Args:
         permutations (list): a list of strings.
 
     Returns:
         list:  a new list with symbols added to each item.
-    """    
-    symbols = ["#", "'", "\"", "(", ")"]
+    """
+    symbols = ["#", "'", '"', "(", ")"]
     new_permutations = []
     new_permutations += [item + " " for item in permutations]
     new_permutations += [" " + item for item in permutations]
@@ -83,11 +84,12 @@ def contains_permutation(line: str, permutations: list) -> bool:
         if item in line:
             index = line.find(item)
             if index > 0:
-                if line[index-1].isalpha():
+                if line[index - 1].isalpha():
                     return False
             return True
 
     return False
+
 
 def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
     """Method for checking commas in i.e. and e.g.
@@ -99,7 +101,7 @@ def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
     Returns:
         bool: valid or invalid file name
     """
-    
+
     ie_extended_permutations = add_symbols_to_permutations(ie_base_permutations)
     eg_extended_permutations = add_symbols_to_permutations(eg_base_permutations)
 
@@ -120,7 +122,7 @@ def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
         print("Exception happened during the hook run. The run will be marked as 'passed'")
         print(f"Filename: {file_path}. Exception:\n{traceback.format_exc()}")
         return True
-    
+
     check_verdict = True
     if len(errors["ie"]) > 0:
         check_verdict = False
@@ -129,7 +131,7 @@ def is_correct_comma_ie_eg(file_path: str, verbose: bool = False) -> bool:
     if len(errors["eg"]) > 0:
         check_verdict = False
         print(f"Found misused comma in 'e.g.' in lines: {errors["eg"]}. File: {file_path}")
-    
+
     return check_verdict
 
 

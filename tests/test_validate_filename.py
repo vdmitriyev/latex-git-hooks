@@ -4,6 +4,7 @@ import pytest
 
 from latexgithooks.validate_filename import has_mixed_case, is_valid_filename, main
 
+
 #
 # Test has_mixed_case function
 #
@@ -26,6 +27,7 @@ def test_has_mixed_case_false_empty_string():
 def test_has_mixed_case_false_special_characters():
     assert has_mixed_case("!@#$%^&*()") == False
 
+
 #
 # Test cases for `is_valid_filename` function
 #
@@ -47,6 +49,7 @@ def test_is_valid_filename_mixed_case():
 
 def test_is_valid_filename_verbose_mode():
     assert not is_valid_filename("MixedCaseFilename.tex", 3, verbose=True)
+
 
 #
 # Test cases for `main` function
