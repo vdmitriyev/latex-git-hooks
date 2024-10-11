@@ -141,15 +141,16 @@ tasks:
     desc: re-creates a new git tag (uses version of "{{.PACKAGE_NAME}}")
     aliases: [gtrc]
     deps: [check-virtualenv]
+    silent: true
     cmds:
       - git tag -d v{{.PACKAGE_VERSION}}
       - task: git-tag-create
 
   git-tag-show:
-    desc: prints all git tags
+    desc: shows  all git tags
     aliases: [gts]
-    silent: true
     deps: [check-virtualenv]
+    silent: true
     cmds:
       - echo "list of git tag"
       - git tag
@@ -157,9 +158,10 @@ tasks:
       - git describe --tags --abbrev=0
 
   git-tag-push:
-    aliases: [gtp]
     desc: pushes all git tags to remote
+    aliases: [gtp]
     deps: [check-virtualenv]
+    silent: true
     cmds:
         - git push --tags origin
 
