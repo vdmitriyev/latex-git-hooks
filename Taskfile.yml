@@ -147,14 +147,15 @@ tasks:
       - task: git-tag-create
 
   git-tag-show:
-    desc: shows  all git tags
+    desc: shows all git tags
     aliases: [gts]
     deps: [check-virtualenv]
     silent: true
     cmds:
-      - echo "list of git tag"
+      - echo "List of git tags:"
       - git tag
-      - echo "latest git tag"
+      - echo ""
+      - echo "Latest git tag:"
       - git describe --tags --abbrev=0
 
   git-tag-push:
