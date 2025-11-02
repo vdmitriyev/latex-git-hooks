@@ -1,0 +1,1 @@
+paperlinter@git+https://github.com/vdmitriyev/Paper-Linter
