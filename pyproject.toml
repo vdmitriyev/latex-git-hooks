@@ -8,7 +8,7 @@ name = "latexgithooks"
 description = "pre-commit hook to validate LaTeX documents."
 readme = "README.md"
 keywords = ["LaTeX", "pre-commit"]
-license = {file = "LICENSE"}
+license = "MIT"
 authors = [
   {name = "vdmitriyev"},
 ]
@@ -18,7 +18,6 @@ maintainers = [
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
