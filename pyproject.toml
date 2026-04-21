@@ -29,7 +29,7 @@ classifiers = [
 dependencies = [
   "paperlinter@git+https://github.com/vdmitriyev/Paper-Linter"
 ]
-version = "0.2.0"
+version = "0.2.1"
 
 scripts.lgh-validate-filename = "latexgithooks.validate_filename:main"
 scripts.lgh-check-latex-packages = "latexgithooks.check_latex_packages:main"
