@@ -1,5 +1,5 @@
 build
-tox==4.61.1
+tox==4.64.4
 pip==26.2.1
 black==26.5.1
 isort==9.0.1
