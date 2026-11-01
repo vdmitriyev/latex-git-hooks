@@ -1,7 +1,7 @@
 build
-tox==4.64.4
-pip==26.2.1
-black==26.5.1
-isort==9.0.1
-pytest==9.1.1
+tox==4.67.4
+pip==26.2.2
+black==26.10.1
+isort==9.0.2
+pytest==9.2.0
 pre-commit
